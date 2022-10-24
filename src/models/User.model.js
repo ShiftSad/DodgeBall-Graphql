@@ -1,18 +1,20 @@
 import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
-    name: {
-        unique: true,
-        type: String,
-        required: true,
-        index: true,
-        maxLength: 17
-    },
-    uuid: {
-        unique: true,
-        type: String,
-        required: true,
-        maxLength: 36
+    identifier: {
+        name: {
+            unique: true,
+            type: String,
+            required: true,
+            index: true,
+            maxLength: 17
+        },
+        uuid: { // Only required of floodgate or original
+            unique: true,
+            type: String,
+            default: null, // Should not break anything
+            maxLength: 36
+        },
     },
     isOriginal: {
         type: Boolean,

@@ -13,7 +13,6 @@ const typeDefs = gql`
     
     # On user creation, you NEED to provide the name, the rest is optional
     type Identifier {
-        id:   ID     # This field is auto generated, so it's not required
         name: String # Only thing that is actually required
         uuid: String # Defaults to null, only needed if the user is original
     }
@@ -36,11 +35,15 @@ const typeDefs = gql`
     }
     
     input UserInput {
-        name:        String!
-        uuid:        String!
+        identifier:  IdentifierInput!
         isOriginal:  Boolean
         isFloodgate: Boolean
         stats:       StatsInput
+    }
+    
+    input IdentifierInput {
+        name: String # Required for user creation
+        uuid: String # Defaults to null, only needed if the user is original
     }
     
     input StatsInput {
