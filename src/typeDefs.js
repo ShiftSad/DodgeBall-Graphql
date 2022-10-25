@@ -52,7 +52,7 @@ const typeDefs = gql`
     }
     
     input TransactionInput {
-        money: Int
+        money: Float
     }
     
     input GameInfoInput {
@@ -65,9 +65,9 @@ const typeDefs = gql`
     }
     
     type Mutation {
-        createUser(user: UserInput): User
-        deleteUser(id: ID, name: String, uuid: String): User
-        updateUser(id: ID, name: String, uuid: String, user: UserInput!): User
+        createUser(user: UserInput!): User
+        deleteUser(identifier: IdentifierInput!): User
+        updateUser(identifier: IdentifierInput!, stats: StatsInput): User
     }
 `;
 

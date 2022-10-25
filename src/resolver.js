@@ -44,15 +44,22 @@ const resolvers = {
           await user.save();
           return user;
       },
-      deleteUser: async (parent, args) => {
-          if (args.id) return User.findByIdAndDelete(args.id);
-          if (args.name) return User.findOneAndDelete({name: args.name});
-          if (args.uuid) return User.findOneAndDelete({uuid: args.uuid});
+      deleteUser: async (parent, args) => { // TODO? -> Maybe a check if the user exists, but looks like a waste of resources
+          if (args.identifier.name) return User.findOneAndDelete({name: args.identifier.name});
+          if (args.identifier.uuid) return User.findOneAndDelete({uuid: args.identifier.uuid});
       },
       updateUser: async (parent, args, _context, _info) => {
-          if (args.id) return User.findByIdAndUpdate(args.id, args.user, {new: true});
-          if (args.name) return User.findOneAndUpdate({name: args.name}, args.user, {new: true});
-          if (args.uuid) return User.findOneAndUpdate({uuid: args.uuid}, args.user, {new: true});
+          // TODO -> Kinda cringe tbh, 2 calls to the db?
+          if (args.identifier.name) {
+              const user = await User.findOne({name: args.identifier.name});
+              user.stats = args.stats;
+              return User.findOneAndUpdate({name: args.identifier.name}, user, { new: true });
+          }
+          if (args.identifier.uuid) {
+              const user = await User.findOne({name: args.identifier.uuid});
+              user.stats = args.stats;
+              return User.findOneAndUpdate({uuid: args.identifier.uuid}, args.stats, { new: true });
+          }
       }
     }
 }
