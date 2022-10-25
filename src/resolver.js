@@ -55,11 +55,9 @@ const resolvers = {
               user.stats = args.stats;
               return User.findOneAndUpdate({name: args.identifier.name}, user, { new: true });
           }
-          if (args.identifier.uuid) {
-              const user = await User.findOne({name: args.identifier.uuid});
-              user.stats = args.stats;
-              return User.findOneAndUpdate({uuid: args.identifier.uuid}, args.stats, { new: true });
-          }
+          const user = await User.findOne({name: args.identifier.uuid});
+          user.stats = args.stats;
+          return User.findOneAndUpdate({uuid: args.identifier.uuid}, args.stats, { new: true });
       }
     }
 }

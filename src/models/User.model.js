@@ -1,4 +1,4 @@
-import mongoose, {Schema} from 'mongoose';
+import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
     identifier: {
@@ -30,11 +30,8 @@ const UserSchema = new mongoose.Schema({
                 type: Number,
                 default: 0
             },
-            // Referring to another table
-            transactions: [{
-                type: Schema.Types.ObjectId,
-                ref: 'transaction'
-            }]
+            // TODO -> Referring to another table
+            // Transactions list
         },
         gameInfo: {
             wins: {
@@ -53,7 +50,8 @@ const UserSchema = new mongoose.Schema({
                 type: Number,
                 default: 0
             },
-            // Referring to another table
+            // TODO -> Referring to another table
+            // Games list
         }
     }
 }, {
