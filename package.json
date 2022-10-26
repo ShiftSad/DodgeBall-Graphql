@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node -- src/app.js"
+    "dev": "nodemon --exec babel-node -- src/app.js",
+    "build": "babel src -d build",
+    "runBuild": "node ./build/app"
   },
   "keywords": [],
   "author": "Sadness",
@@ -22,6 +24,6 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "graphql": "^16.6.0",
-    "mongoose": "^6.6.7"
+    "mongoose": "^6.6.7",
   }
 }

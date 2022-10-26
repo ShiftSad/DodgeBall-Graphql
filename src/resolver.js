@@ -45,7 +45,7 @@ const resolvers = {
           return user;
       },
       deleteUser: async (parent, args) => { // TODO? -> Maybe a check if the user exists, but looks like a waste of resources
-          if (args.identifier.name) return User.findOneAndDelete({name: args.identifier.name});
+          if (args.identifier.name) return User.findOneAndDelete({name: args.identifier.name}, {useFindAndModify: false});
           if (args.identifier.uuid) return User.findOneAndDelete({uuid: args.identifier.uuid});
       },
       updateUser: async (parent, args, _context, _info) => {
